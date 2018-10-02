@@ -9,13 +9,10 @@ cc_binary(
         "zero_out_op.cc",
     ],
     linkshared = 1,
-    # conplains when using @local_config_tf/lib:libtensorflow_framework.so
-    data = [
+    deps = [
         "@local_config_tf//:libtensorflow_framework",
         "@local_config_tf//:tf_header_lib",
     ],
-    deps = [
-        "@local_config_tf//:tf_header_lib",
-    ],
-    copts = ["-Iexternal/local_config_tf/include", "-O2"]
+    linkopts = ["-Wl,-soname,zero_out.so"],
+    copts = ["-pthread", "-std=c++11"]
 )
