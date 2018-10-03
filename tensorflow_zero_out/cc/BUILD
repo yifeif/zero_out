@@ -13,6 +13,5 @@ cc_binary(
         "@local_config_tf//:libtensorflow_framework",
         "@local_config_tf//:tf_header_lib",
     ],
-    linkopts = ["-Wl,-soname,zero_out.so"],
-    copts = ["-pthread", "-std=c++11"]
+    copts = ["-pthread", "-D_GLIBCXX_USE_CXX11_ABI=0"]
 )
