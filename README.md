@@ -5,7 +5,7 @@ This is a template/example of building custom ops for TensorFlow.
 
 ### Use Docker
 
-Inside Docker container for image tensorflow/tensorflow:custom_op, clone the repository. 
+Inside Docker container for image tensorflow/tensorflow:custom_op, clone this repository. 
 
 ### Build pip package
 
@@ -23,7 +23,7 @@ With Makefile:
 
 ### Test pip package
 ```bash
-python -c "import tensorflow tensorflow_zero_out"
+python -c "import tensorflow, tensorflow_zero_out"
 ```
 
 ## Create and distribute custom ops
