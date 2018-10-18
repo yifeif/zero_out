@@ -1,6 +1,6 @@
 sh_binary(
-    name = "new_pip_pkg",
-    srcs = ["new_pip_pkg.sh"],
+    name = "build_pip_pkg",
+    srcs = ["build_pip_pkg.sh"],
     data = [
         "MANIFEST.in",
         "setup.py",
