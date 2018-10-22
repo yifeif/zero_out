@@ -32,8 +32,14 @@ With Makefile:
 ```
 
 ### Test pip package
+First install the pip package we just built with
 ```bash
-python -c "import tensorflow, tensorflow_zero_out"
+pip install /tmp/zero_out_pip/*.whl
+```
+Then test out the pip package
+```bash
+cd ..
+python -c "import tensorflow as tf;import tensorflow_zero_out as zero_out_module;zero_out_module.zero_out([[1,2], [3,4]]).eval(session=tf.Session())"
 ```
 
 ## Create and distribute custom ops
