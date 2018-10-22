@@ -1,1 +1,1 @@
-recursive-include tensorflow_zero_out/cc *.so
+recursive-include tensorflow_zero_out/ *.so

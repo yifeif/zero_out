@@ -14,11 +14,24 @@
 # limitations under the License.
 # ==============================================================================
 set -e
+set -x
 
 PLATFORM="$(uname -s | tr 'A-Z' 'a-z')"
 
+PIP_FILE_PREFIX="bazel-bin/build_pip_pkg.runfiles/__main__/"
+
 function main() {
-  if [ $# -lt 1 ] ; then
+  while [[ ! -z "${1}" ]]; do
+    if [[ ${1} == "make" ]]; then
+      echo "Using Makefile to build pip package."
+      PIP_FILE_PREFIX=""
+    else
+      DEST=${1}
+    fi
+    shift
+  done
+
+  if [[ -z ${DEST} ]]; then
     echo "No destination dir provided"
     exit 1
   fi
@@ -27,8 +40,8 @@ function main() {
   # give us an absolute paths with tilde characters resolved to the destination
   # directory. Readlink -f is a cleaner way of doing this but is not available
   # on a fresh macOS install.
-  mkdir -p "$1"
-  DEST="$(dirname "${1}/does_not_exist")"
+  mkdir -p ${DEST}
+  DEST="$(dirname "${DEST}/does_not_exist")"
   echo "=== destination directory: ${DEST}"
 
   TMPDIR=$(mktemp -d -t tmp.XXXXXXXXXX)
@@ -37,27 +50,20 @@ function main() {
 
   echo "=== Copy TensorFlow Zero Out files"
 
-  cp bazel-bin/new_pip_pkg.runfiles/tensorflow_zero_out/setup.py "${TMPDIR}"
-  cp bazel-bin/new_pip_pkg.runfiles/tensorflow_zero_out/MANIFEST.in "${TMPDIR}"
-  cp -R \
-    bazel-bin/new_pip_pkg.runfiles/tensorflow_zero_out/tensorflow_zero_out \
-    "${TMPDIR}"
+  cp ${PIP_FILE_PREFIX}setup.py "${TMPDIR}"
+  cp ${PIP_FILE_PREFIX}MANIFEST.in "${TMPDIR}"
+  cp ${PIP_FILE_PREFIX}LICENSE "${TMPDIR}"
+  rsync -avm --exclude='*_test.py' ${PIP_FILE_PREFIX}tensorflow_zero_out "${TMPDIR}"
 
   pushd ${TMPDIR}
-  if [ "${TFL_SDIST}" = true ]; then
-    echo $(date) : "=== Building source distribution and wheel"
-  else
-    echo $(date) : "=== Building wheel"
-  fi
+  echo $(date) : "=== Building wheel"
 
   python setup.py bdist_wheel > /dev/null
-
-
 
   cp dist/* "${DEST}"
   popd
   rm -rf ${TMPDIR}
-  echo $(date) : "=== Output tar ball and wheel file are in: ${DEST}"
+  echo $(date) : "=== Output wheel file is in: ${DEST}"
 }
 
 main "$@"
