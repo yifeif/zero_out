@@ -4,16 +4,26 @@ This is a template/example of building custom ops for TensorFlow.
 ## Try building example zero_out op
 
 ### Use Docker
+Pull the provided Docker container from Docker hub.
+
+```bash
+  docker pull yifeif/tensorflow:custom_op
+  docker run -it yifeif/tensorflow:custom_op /bin/bash
+```
 
 Inside Docker container for image tensorflow/tensorflow:custom_op, clone this repository. 
+```bash
+git clone -b test https://github.com/yifeif/zero_out.git
+cd zero_out
+```
 
 ### Build pip package
 
 With bazel:
 ```bash
   ./configure.sh
-  bazel build new_pip_pkg
-  bazel-bin/new_pip_pkg /tmp/zero_out_pip
+  bazel build build_pip_pkg
+  bazel-bin/build_pip_pkg /tmp/zero_out_pip
 ```
 
 With Makefile:
