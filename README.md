@@ -39,7 +39,7 @@ pip install /tmp/zero_out_pip/*.whl
 Then test out the pip package
 ```bash
 cd ..
-python -c "import tensorflow as tf;import tensorflow_zero_out as zero_out_module;zero_out_module.zero_out([[1,2], [3,4]]).eval(session=tf.Session())"
+python -c "import tensorflow as tf;import tensorflow_zero_out as zero_out_module;print(zero_out_module.zero_out([[1,2], [3,4]]).eval(session=tf.Session()))"
 ```
 
 ## Create and distribute custom ops
