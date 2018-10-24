@@ -50,47 +50,37 @@ Now you are ready to write and distribute your own ops. The example in this repo
 ### Template Overview
 First let's go through a quick overview of the folder structure of the template repo.
 ```
-zero_out
-|   # files for creating pip package
-│   setup.py
-|   MANIFEST.in
-|   # script to build pip package for Bazel and Makefile
-│   build_pip_pkg.sh\
-|   # script to install TensorFlow and setup action_env for Bazel
-|   configure.sh
-│   # top level Bazel BUILD file that contains pip package build target
-|   BUILD
-|   # Used by Bazel to specify tensorflow pip package as an external dependency
-|   WORKSPACE
-|   # Makefile for building shared library and pip package
-|   Makefile
-|
-└───tensorflow_zero_out
-│   │   # BUILD file for all op targets
-│   │   BUILD
-│   │   # top level __init__ file that import the custom op
+├── tensorflow_zero_out
+│   ├── cc
+│   │   ├── kernels  # op kernel implementation
+│   │   │   └── zero_out_kernels.cc
+│   │   └── ops  # op interface defination
+│   │       └── zero_out_ops.cc
+│   ├── python
+│   │   ├── ops
+│   │   │   ├── __init__.py
+│   │   │   ├── zero_out_ops.py   # Load and extend the ops in python
+│   │   │   └── zero_out_ops_test.py  # tests for ops
+│   │   └── __init__.py
 |   |
-│   └───cc
-|   |   └───kernels
-│   |   |   │   # op kernel implementation
-│   |   |   │   zero_out_kernels.cc
-|   |   └───ops
-│   |       │   # op interface defination
-│   |       │   zero_out_ops.cc
-│   └───python
-|       └───ops
-│           │   # Load and extend the ops in python
-│           │   zero_out_ops.py
-│           │   # tests for ops
-│           │   zero_out_ops_test.py
+│   ├── BUILD  # BUILD file for all op targets
+│   └── __init__.py  # top level __init__ file that import the custom op
+│
+├── tf
+│   ├── BUILD
+│   ├── BUILD.tpl
+│   └── tf_configure.bzl
 |
-└───tf
-    |   # .bzl files for setting up genrule targets for tensorflow pip package
-    |   tf_configure.bzl
-    |   # BUILD file template for TensorFlow pip package as external dependency
-    |   BUILD.tpl
-    |   # dummy BUILD file
-    │   BUILD
+├── BUILD  # top level Bazel BUILD file that contains pip package build target
+├── build_pip_pkg.sh  # script to build pip package for Bazel and Makefile
+├── configure.sh  # script to install TensorFlow and setup action_env for Bazel
+├── LICENSE
+├── Makefile  # Makefile for building shared library and pip package
+├── MANIFEST.in
+├── README.md
+├── setup.py  # files for creating pip package
+└── WORKSPACE  # Used by Bazel to specify tensorflow pip package as an external dependency
+
 ```
 
 After clone the repo, replace the `tensorflow_zero_out` directory with the name of your op.
