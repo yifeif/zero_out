@@ -21,9 +21,12 @@ from __future__ import print_function
 import numpy as np
 
 from tensorflow.python.platform import test
-from zero_out import zero_out
+from tensorflow_zero_out.python.ops.zero_out_ops import zero_out
 
 class ZeroOutTest(test.TestCase):
-  def test_zero_out(self):
+  def testZeroOut(self):
     with self.test_session() as sess:
-      self.assertAllClose(zero_out([[1, 2], [3, 4]]).eval(), np.array([[0, 2], [3, 4]]))
+      self.assertAllClose(zero_out([[1, 2], [3, 4]]).eval(), np.array([[1, 0], [0, 0]]))
+
+if __name__ == '__main__':
+  test.main()

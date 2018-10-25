@@ -22,7 +22,7 @@ py_library(
         "python/ops/zero_out_ops.py",
     ]),
     data = [
-        "//tensorflow_zero_out:python/ops/_zero_out_ops.so"
+        ":python/ops/_zero_out_ops.so"
     ],
     srcs_version = "PY2AND3",
 )
@@ -33,6 +33,9 @@ py_test(
         "python/ops/zero_out_ops_test.py"
     ],
     main = "python/ops/zero_out_ops_test.py",
+    deps = [
+        ":zero_out_ops_py",
+    ],
     srcs_version = "PY2AND3",
 )
 
