@@ -20,21 +20,20 @@ py_library(
     name = "zero_out_ops_py",
     srcs = ([
         "python/ops/zero_out_ops.py",
-        "__init__.py",
-        "python/__init__.py",
-        "python/ops/__init__.py",
     ]),
-    data = [":python/ops/_zero_out_ops.so"],
+    data = [
+        "//tensorflow_zero_out:python/ops/_zero_out_ops.so"
+    ],
     srcs_version = "PY2AND3",
 )
 
 py_test(
     name = "zero_out_ops_py_test",
-    srcs = ([ "python/ops/zero_out_ops_test.py"]),
+    srcs = [
+        "python/ops/zero_out_ops_test.py"
+    ],
     main = "python/ops/zero_out_ops_test.py",
-    data = [":python/ops/_zero_out_ops.so"],
     srcs_version = "PY2AND3",
-    deps = [':zero_out_ops_py']
 )
 
 py_library(
@@ -42,8 +41,9 @@ py_library(
     srcs = ([
         "__init__.py",
         "python/__init__.py",
-        "python/ops/__init__.py",
     ]),
-    deps = [":zero_out_ops_py"],
+    deps = [
+        ":zero_out_ops_py"
+    ],
     srcs_version = "PY2AND3",
 )
