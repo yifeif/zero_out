@@ -21,7 +21,7 @@ from __future__ import print_function
 import numpy as np
 
 from tensorflow.python.platform import test
-from tensorflow_zero_out.python.ops.zero_out_ops import zero_out
+from zero_out_ops import zero_out
 
 class ZeroOutTest(test.TestCase):
   def testZeroOut(self):
