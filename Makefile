@@ -12,8 +12,8 @@ LDFLAGS = -shared ${TF_LFLAGS}
 TARGET_LIB = tensorflow_zero_out/python/ops/_zero_out_ops.so
 
 
-.PHONY: all
-all: $(TARGET_LIB)
+.PHONY: op
+op: $(TARGET_LIB)
 
 $(TARGET_LIB): $(SRCS)
 	$(CXX) $(CFLAGS) -o $@ $^ ${LDFLAGS}
