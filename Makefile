@@ -22,7 +22,7 @@ test: tensorflow_zero_out/python/ops/zero_out_ops_test.py tensorflow_zero_out/py
 	$(PYTHON_BIN_PATH) tensorflow_zero_out/python/ops/zero_out_ops_test.py
 
 pip_pkg: $(TARGET_LIB)
-	./build_pip_pkg.sh make /tmp/zero_out_pip 
+	./build_pip_pkg.sh make artifacts
 
 
 .PHONY: clean
