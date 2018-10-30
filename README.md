@@ -36,7 +36,7 @@ With Makefile:
 ### Install and Test PIP Package
 Once the pip package has been built, you can install it with,
 ```bash
-pip2 install artifacts/*.whl
+pip install artifacts/*.whl
 ```
 Then test out the pip package
 ```bash

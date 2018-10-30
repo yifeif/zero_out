@@ -12,7 +12,7 @@ rm .bazelrc
 if python -c "import tensorflow" &> /dev/null; then
     echo 'using installed tensorflow'
 else
-    pip2 install tensorflow
+    pip install tensorflow
 fi
 
 TF_CFLAGS=( $(python -c 'import tensorflow as tf; print(" ".join(tf.sysconfig.get_compile_flags()))') )
