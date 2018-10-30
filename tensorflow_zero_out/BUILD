@@ -44,6 +44,7 @@ py_library(
     srcs = ([
         "__init__.py",
         "python/__init__.py",
+        "python/ops/__init__.py",
     ]),
     deps = [
         ":zero_out_ops_py"
